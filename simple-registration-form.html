@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #eef2f1;
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .box {
+    background: white;
+    width: 340px;
+    padding: 24px;
+    border: 1px solid #c5d2cf;
+    border-radius: 10px;
+  }
+  h2 {
+    margin: 0 0 8px;
+    text-align: center;
+    color: #17302c;
+  }
+  label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #17302c;
+  }
+  input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1.5px solid #c5d2cf;
+    border-radius: 6px;
+  }
+  input:focus {
+    outline: none;
+    border-color: #0f6b5c;
+  }
+  .error {
+    color: #b3261e;
+    font-size: 13px;
+  }
+  button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 10px;
+    background: #0f6b5c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #0c5548;
+  }
+</style>
+</head>
+ 
+<body>
+<div class="box">
+  <h2>Registration Form</h2>
+ 
+  <form onsubmit="return validateForm()">
+    <label>Name</label>
+    <input type="text" id="name" onblur="validateName()">
+    <span class="error" id="nameError"></span>
+ 
+    <label>Email</label>
+    <input type="text" id="email" onblur="validateEmail()">
+    <span class="error" id="emailError"></span>
+ 
+    <label>Mobile Number</label>
+    <input type="text" id="mobile" onblur="validateMobile()">
+    <span class="error" id="mobileError"></span>
+ 
+    <label>Username</label>
+    <input type="text" id="username" onblur="validateUsername()">
+    <span class="error" id="usernameError"></span>
+ 
+    <label>Password</label>
+    <input type="password" id="password" onblur="validatePassword()">
+    <span class="error" id="passwordError"></span>
+ 
+    <button type="submit">Submit</button>
+  </form>
+</div>
+ 
+<script>
+ 
+function validateName() {
+  var name = document.getElementById("name").value;
+  var error = document.getElementById("nameError");
+ 
+  if (name == "") {
+    error.innerHTML = "Name cannot be empty";
+    return false;
+  }
+  if (!/^[A-Za-z ]+$/.test(name)) {
+    error.innerHTML = "Name can have only letters and spaces";
+    return false;
+  }
+  error.innerHTML = "";
+  return true;
+}
+ 
+function validateEmail() {
+  var email = document.getElementById("email").value;
+  var error = document.getElementById("emailError");
+ 
+  if (!/^[^ @]+@[^ @]+\.[^ @]+$/.test(email)) {
+    error.innerHTML = "Enter a valid email (example: abc@gmail.com)";
+    return false;
+  }
+  error.innerHTML = "";
+  return true;
+}
+ 
+function validateMobile() {
+  var mobile = document.getElementById("mobile").value;
+  var error = document.getElementById("mobileError");
+ 
+  if (!/^[0-9]{10}$/.test(mobile)) {
+    error.innerHTML = "Mobile number must be exactly 10 digits";
+    return false;
+  }
+  error.innerHTML = "";
+  return true;
+}
+ 
+function validateUsername() {
+  var username = document.getElementById("username").value;
+  var error = document.getElementById("usernameError");
+ 
+  if (username == "") {
+    error.innerHTML = "Username cannot be empty";
+    return false;
+  }
+  error.innerHTML = "";
+  return true;
+}
+ 
+function validatePassword() {
+  var password = document.getElementById("password").value;
+  var error = document.getElementById("passwordError");
+  var strong = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$/;
+ 
+  if (!strong.test(password)) {
+    error.innerHTML = "Min 8 characters with uppercase, lowercase, digit and special character";
+    return false;
+  }
+  error.innerHTML = "";
+  return true;
+}
+ 
+function validateForm() {
+  var a = validateName();
+  var b = validateEmail();
+  var c = validateMobile();
+  var d = validateUsername();
+  var e = validatePassword();
+ 
+  if (a && b && c && d && e) {
+    alert("Form submitted successfully!");
+    return true;
+  } else {
+    alert("Invalid input! Please correct the errors.");
+    return false;
+  }
+}
+</script>
+</body>
+</html>
